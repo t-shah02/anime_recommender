@@ -1,0 +1,7 @@
+flask
+gunicorn
+bs4
+requests
+pandas
+joblib
+psycopg2
