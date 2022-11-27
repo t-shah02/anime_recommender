@@ -1,26 +1,27 @@
 from flask import Flask, render_template, request
 from flask_cors import CORS, cross_origin
 import json
-from server.model import predict_n_animes
+from backend.model import predict_n_animes
 
 
-app = Flask(__name__, template_folder="templates")
 
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
+server = Flask(__name__, template_folder="templates")
 
-@app.route("/")
+cors = CORS(server)
+server.config['CORS_HEADERS'] = 'Content-Type'
+
+@server.route("/")
 @cross_origin()
 def index():
   return "Welcome to the Weeb Tree API",200
 
 
-@app.route("/etl")
+@server.route("/etl")
 @cross_origin()
 def etl():
     return render_template("anime_etl.html")
     
-@app.route("/predict", methods=["GET"])
+@server.route("/predict", methods=["GET"])
 @cross_origin()
 def predict():
     genres = request.args.get("genres")
@@ -63,7 +64,7 @@ def predict():
     return results,200
     
 
-@app.route("/data",methods=["GET"])
+@server.route("/data",methods=["GET"])
 @cross_origin()
 def genres():
     with open("./backend/data/misc.json","r") as file:
