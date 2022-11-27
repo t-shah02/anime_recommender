@@ -28,18 +28,38 @@ def predict():
     episodes = request.args.get("episodes")
     anime_type = request.args.get("anime_type")
     neighbors = request.args.get("neighbors")
-    
+
+    # sanitize data and check if query parameters exist and are valid
     if not genres or not episodes or not neighbors or not anime_type or not rating:
         return {"Status" : "Missing required URL parameters to run prediction model"}, 422
 
+    # convert appropriate and validate bounds
+    try:
+        episodes = int(episodes)
+        rating = float(rating)  
+        neighbors = int(neighbors)
+        
+        if episodes < 0:
+            return {"Status" : "Parameter episodes need to be a positive whole number"}, 400
+
+        if rating < 0 or rating > 10:
+            return {"Status" : "Parameter rating need to be a floating point value in the range of [0,10]"}, 400
+        
+        if neighbors not in range(1,11):
+            return {"Status" : "Parameter neighbors must be between 1 and 10"}, 400
+
+    except ValueError:
+        return {"Status": "At least one of the numeric parameters was not the correct type"}, 400
+
     prediction_data = {
         "genres" : genres.split(","),
-        "rating" : float(rating),
-        "episodes" : int(episodes),
+        "rating" : rating,
+        "episodes" : episodes,
         "anime_type" : anime_type        
     }
 
-    results = predict_n_animes(prediction_data, int(neighbors))
+    results = predict_n_animes(prediction_data, neighbors)
+
     return results,200
     
 

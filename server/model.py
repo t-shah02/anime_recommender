@@ -85,7 +85,6 @@ def get_anime_json(indices):
 def predict_n_animes(user_prediction_data, n):
     anime_type, episodes, rating, genres = user_prediction_data["anime_type"], user_prediction_data["episodes"], user_prediction_data["rating"], user_prediction_data["genres"]
 
-    if n not in range(1,11): return False
     
     model = load(f"./server/models/neighbors{n}.pkl")
     prediction_vector = generate_prediction_vector(anime_type, episodes, rating, genres)
