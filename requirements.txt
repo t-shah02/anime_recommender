@@ -7,3 +7,4 @@ joblib
 psycopg2
 flask_cors
 python-dotenv
+scikit-learn
