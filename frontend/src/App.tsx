@@ -15,9 +15,9 @@ function App() {
 
 
 
-  useEffect(() => {
-      const response = await fetch("")
-  },[]);
+  // useEffect(() => {
+  //     const response = await fetch("")
+  // },[]);
 
 
   return (

@@ -1,4 +1,4 @@
-import server.server as server_module
+import backend.server as server_module
 
 app = server_module.app
 
