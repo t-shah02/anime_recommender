@@ -3,7 +3,7 @@ import numpy as np
 from joblib import load
 from bs4 import BeautifulSoup as Soup
 import requests
-from db.handle import *
+from server.db.handle import *
 
 
 

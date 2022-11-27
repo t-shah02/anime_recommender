@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from flask_cors import CORS, cross_origin
 import json
-from model import predict_n_animes
+from server.model import predict_n_animes
 
 
 app = Flask(__name__, template_folder="templates")

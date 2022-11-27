@@ -5,3 +5,4 @@ requests
 pandas
 joblib
 psycopg2
+flask_cors
