@@ -4,10 +4,13 @@ import os
 
 dotenv.load_dotenv()
 
-PSQL_USER = os.getenv("PSQL_USER")
-PSQL_PASSWORD = os.getenv("PSQL_PASSWORD")
-PSQL_DB = os.getenv("PSQL_DB")
-CONN_STR = f"dbname={PSQL_DB} user={PSQL_USER} password={PSQL_PASSWORD}"
+CONN_STR = os.getenv("DATABASE_URL")
+
+
+# PSQL_USER = os.getenv("PSQL_USER")
+# PSQL_PASSWORD = os.getenv("PSQL_PASSWORD")
+# PSQL_DB = os.getenv("PSQL_DB")
+# CONN_STR = f"dbname={PSQL_DB} user={PSQL_USER} password={PSQL_PASSWORD}"
 
 def create_anime_table():
     conn = psycopg2.connect(CONN_STR)
@@ -51,4 +54,3 @@ def select_from_anime_table(anime_id):
     return result
 
 
-print(select_from_anime_table(1))
