@@ -9,7 +9,7 @@ from server.db.handle import *
 
 
 # load the dataset and select feature set
-ANIME_DF = pd.read_csv("./data/cleaned_anime.csv")
+ANIME_DF = pd.read_csv("./server/data/cleaned_anime.csv")
 X = ANIME_DF.drop(["anime_id","name","genre","type"],axis=1)
 
 # unique anime types to number map
@@ -87,7 +87,7 @@ def predict_n_animes(user_prediction_data, n):
 
     if n not in range(1,11): return False
     
-    model = load(f"./models/neighbors{n}.pkl")
+    model = load(f"./server/models/neighbors{n}.pkl")
     prediction_vector = generate_prediction_vector(anime_type, episodes, rating, genres)
     
     distances, indices = model.kneighbors([prediction_vector])
