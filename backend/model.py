@@ -3,13 +3,13 @@ import numpy as np
 from joblib import load
 from bs4 import BeautifulSoup as Soup
 import requests
-from server.db.handle import *
+from backend.db.handle import *
 
 
 
 
 # load the dataset and select feature set
-ANIME_DF = pd.read_csv("./server/data/cleaned_anime.csv")
+ANIME_DF = pd.read_csv("./backend/data/cleaned_anime.csv")
 X = ANIME_DF.drop(["anime_id","name","genre","type"],axis=1)
 
 # unique anime types to number map
@@ -86,7 +86,7 @@ def predict_n_animes(user_prediction_data, n):
     anime_type, episodes, rating, genres = user_prediction_data["anime_type"], user_prediction_data["episodes"], user_prediction_data["rating"], user_prediction_data["genres"]
 
     
-    model = load(f"./server/models/neighbors{n}.pkl")
+    model = load(f"./backend/models/neighbors{n}.pkl")
     prediction_vector = generate_prediction_vector(anime_type, episodes, rating, genres)
     
     distances, indices = model.kneighbors([prediction_vector])

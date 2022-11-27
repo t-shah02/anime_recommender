@@ -66,7 +66,7 @@ def predict():
 @app.route("/data",methods=["GET"])
 @cross_origin()
 def genres():
-    with open("./data/misc.json","r") as file:
+    with open("./backend/data/misc.json","r") as file:
         data = json.loads(file.read())
     
     return data, 200
